@@ -1,0 +1,8 @@
+AsixUI
+======
+
+A Windows UI Template From WTL
+
+AsixUI 衍生于WTL，在功能上进行改进和扩展，只支持XP SP3以上系统平台
+不支持WinCE平台，不支持VC9以下版本编译器
+未来可能不会兼容WTL
