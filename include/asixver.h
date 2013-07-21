@@ -20,8 +20,32 @@
 #define _WIN32_WINNT 						0x0501
 #endif
 
+// To mimic older RichEdit behavior, set _RICHEDIT_VER to appropriate value
+//		Version 1.0 	0x0100	
+//		Version 2.0 	0x0200	
+//		Version 2.1 	0x0210
+// http://msdn.microsoft.com/en-us/library/windows/desktop/bb787873%28v=vs.85%29.aspx
+// http://blogs.msdn.com/b/murrays/archive/2006/10/14/richedit-versions.aspx
+
+// 2.0	Riched20.dll	RICHEDIT_CLASS
+// 3.0	Riched20.dll	RICHEDIT_CLASS
+// 4.1	Msftedit.dll	MSFTEDIT_CLASS
+// Windows XP SP1	Includes Microsoft Rich Edit 4.1, Microsoft Rich Edit 3.0, and a Microsoft Rich Edit 1.0 emulator.
+// Windows XP	Includes Microsoft Rich Edit 3.0 with a Microsoft Rich Edit 1.0 emulator.
+
+/*	Version 		Ships ('ed) with 									dll name
+
+	3.0 			Office 2000, Windows ME/2000/XP 					riched20.dll
+	1.0	emulator 	Office 2000, Windows 2000/XP/Vista 					riched32.dll
+	3.1 			Windows Server 2003, Vista 							riched20.dll
+	4.1 			Windows XP SP1, Tablet, Vista						msftedit.dll
+	5.0 			Office 2003 										riched20.dll
+	5.1 			Windows CE, Pocket Word 							riched20.dll
+	6.0 			Office 2007, Encarta Math Calculator 				riched20.dll
+	7.0				Office 2010											
+*/
 #ifndef _RICHEDIT_VER
-#define _RICHEDIT_VER						0x0200
+#define _RICHEDIT_VER						0x0410
 #endif
 
 #define _WIN32_WINNT_WINXP                  0x0501
