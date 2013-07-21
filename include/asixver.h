@@ -183,7 +183,7 @@
 // set _WIN32_IE based on _WIN32_WINNT
 #if (_WIN32_WINNT < _WIN32_WINNT_WINXP)
 #error AsixUI need at least Windows XP
-#elif (_WIN32_WINNT == _WIN32_WINNT_WS03)
+#elif (_WIN32_WINNT == _WIN32_WINNT_WINXP)
 #define _WIN32_IE       _WIN32_IE_IE60
 #elif (_WIN32_WINNT <= _WIN32_WINNT_WS03)
 #define _WIN32_IE       _WIN32_IE_WS03
