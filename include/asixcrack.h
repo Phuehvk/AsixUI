@@ -7,8 +7,10 @@
 
 #pragma once
 
+#include <asixapp.h>
+
 #ifndef _ASIXAPP_INC_
-	#error asixcrack.h requires asixapp.h to be included first
+#error asixcrack.h requires asixapp.h to be included first
 #endif
 
 
@@ -464,11 +466,11 @@ public: \
 #define MSG_WM_DELETEITEM(func) \
 	if (uMsg == WM_DELETEITEM) \
 	{ \
-		SetMsgHandled(TRUE); \
-		func((UINT)wParam, (LPDELETEITEMSTRUCT)lParam); \
-		lResult = TRUE; \
-		if(IsMsgHandled()) \
-			return TRUE; \
+	SetMsgHandled(TRUE); \
+	func((UINT)wParam, (LPDELETEITEMSTRUCT)lParam); \
+	lResult = TRUE; \
+	if(IsMsgHandled()) \
+	return TRUE; \
 	}
 
 //int OnCharToItem(UINT nChar, UINT nIndex, CListBox listBox)
@@ -529,7 +531,7 @@ public: \
 		SetMsgHandled(TRUE); \
 		lResult = (LRESULT)func((LPCREATESTRUCT)lParam); \
 		if(IsMsgHandled()) \
-			return TRUE; \
+		return TRUE; \
 	}
 
 // void OnNcDestroy()
@@ -811,7 +813,7 @@ public: \
 		func((UINT)wParam, (DWORD)lParam); \
 		lResult = 0; \
 		if(IsMsgHandled()) \
-			return TRUE; \
+	return TRUE; \
 	}
 
 // void OnTimer(UINT_PTR nIDEvent)
@@ -1604,11 +1606,6 @@ public: \
 			return TRUE; \
 	}
 
-///////////////////////////////////////////////////////////////////////////////
-// New NT4 & NT5 messages
-
-#if(_WIN32_WINNT >= 0x0400)
-
 // void OnMouseHover(WPARAM wParam, CPoint ptPos)
 #define MSG_WM_MOUSEHOVER(func) \
 	if (uMsg == WM_MOUSEHOVER) \
@@ -1630,10 +1627,6 @@ public: \
 		if(IsMsgHandled()) \
 			return TRUE; \
 	}
-
-#endif /* _WIN32_WINNT >= 0x0400 */
-
-#if(WINVER >= 0x0500)
 
 // void OnMenuRButtonUp(WPARAM wParam, CMenuHandle menu)
 #define MSG_WM_MENURBUTTONUP(func) \
@@ -1687,10 +1680,6 @@ public: \
 		if(IsMsgHandled()) \
 			return TRUE; \
 	}
-
-#endif /* WINVER >= 0x0500 */
-
-#if(_WIN32_WINNT >= 0x0500)
 
 // BOOL OnAppCommand(CWindow wndFocus, short cmd, WORD uDevice, int dwKeys)
 #define MSG_WM_APPCOMMAND(func) \
@@ -1787,7 +1776,7 @@ public: \
 		func(LOWORD(wParam), HIWORD(wParam)); \
 		lResult = 0; \
 		if(IsMsgHandled()) \
-			return TRUE; \
+		return TRUE; \
 	}
 
 // LRESULT OnQueryUIState()
@@ -1799,10 +1788,6 @@ public: \
 		if(IsMsgHandled()) \
 			return TRUE; \
 	}
-
-#endif // (_WIN32_WINNT >= 0x0500)
-
-#if(_WIN32_WINNT >= 0x0501)
 
 // void OnInput(WPARAM RawInputCode, HRAWINPUT hRawInput)
 #define MSG_WM_INPUT(func) \
@@ -1849,8 +1834,6 @@ public: \
 		if(IsMsgHandled()) \
 			return TRUE; \
 	}
-
-#endif /* _WIN32_WINNT >= 0x0501 */
 
 ///////////////////////////////////////////////////////////////////////////////
 // ATL defined messages
@@ -2158,7 +2141,7 @@ public: \
 		SetMsgHandled(TRUE); \
 		lResult = func(uMsg, wParam, lParam); \
 		if(IsMsgHandled()) \
-			return TRUE; \
+		return TRUE; \
 	}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2266,7 +2249,7 @@ public: \
 		SetMsgHandled(TRUE); \
 		lResult = func((LPNMHDR)lParam); \
 		if(IsMsgHandled()) \
-			return TRUE; \
+		return TRUE; \
 	}
 
 // LRESULT OnReflectedCommandHandlerEX(UINT uNotifyCode, int nID, CWindow wndCtl)
