@@ -8,6 +8,11 @@
 
 #pragma once
 
+
+///////////////////////////////////////////////////////////////////////////////
+// Asix version number
+
+#define _ASIX_VER	0x0100
 //
 // _WIN32_WINNT version constants, for XP Higher
 
