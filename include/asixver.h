@@ -14,40 +14,10 @@
 
 #define _ASIX_VER	0x0100
 //
-// _WIN32_WINNT version constants, for XP Higher
 
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 						0x0501
-#endif
 
-// To mimic older RichEdit behavior, set _RICHEDIT_VER to appropriate value
-//		Version 1.0 	0x0100	
-//		Version 2.0 	0x0200	
-//		Version 2.1 	0x0210
-// http://msdn.microsoft.com/en-us/library/windows/desktop/bb787873%28v=vs.85%29.aspx
-// http://blogs.msdn.com/b/murrays/archive/2006/10/14/richedit-versions.aspx
 
-// 2.0	Riched20.dll	RICHEDIT_CLASS
-// 3.0	Riched20.dll	RICHEDIT_CLASS
-// 4.1	Msftedit.dll	MSFTEDIT_CLASS
-// Windows XP SP1	Includes Microsoft Rich Edit 4.1, Microsoft Rich Edit 3.0, and a Microsoft Rich Edit 1.0 emulator.
-// Windows XP	Includes Microsoft Rich Edit 3.0 with a Microsoft Rich Edit 1.0 emulator.
-
-/*	Version 		Ships ('ed) with 									dll name
-
-	3.0 			Office 2000, Windows ME/2000/XP 					riched20.dll
-	1.0	emulator 	Office 2000, Windows 2000/XP/Vista 					riched32.dll
-	3.1 			Windows Server 2003, Vista 							riched20.dll
-	4.1 			Windows XP SP1, Tablet, Vista						msftedit.dll
-	5.0 			Office 2003 										riched20.dll
-	5.1 			Windows CE, Pocket Word 							riched20.dll
-	6.0 			Office 2007, Encarta Math Calculator 				riched20.dll
-	7.0				Office 2010											
-*/
-#ifndef _RICHEDIT_VER
-#define _RICHEDIT_VER						0x0410
-#endif
-
+#define _WIN32_WINNT_WIN2K                  0x0500
 #define _WIN32_WINNT_WINXP                  0x0501
 #define _WIN32_WINNT_WS03                   0x0502
 #define _WIN32_WINNT_WIN6                   0x0600
@@ -60,7 +30,6 @@
 //
 // _WIN32_IE_ version constants, for at least IE6
 //
-
 #define _WIN32_IE_IE60                      0x0600
 #define _WIN32_IE_IE60SP1                   0x0601
 #define _WIN32_IE_IE60SP2                   0x0603
@@ -87,6 +56,11 @@
 //
 // NTDDI version constants
 //
+#define NTDDI_WIN2K                         0x05000000
+#define NTDDI_WIN2KSP1                      0x05000100
+#define NTDDI_WIN2KSP2                      0x05000200
+#define NTDDI_WIN2KSP3                      0x05000300
+#define NTDDI_WIN2KSP4                      0x05000400
 
 #define NTDDI_WINXP                         0x05010000
 #define NTDDI_WINXPSP1                      0x05010100
@@ -120,6 +94,7 @@
 #define NTDDI_WS08SP4                       NTDDI_WIN6SP4
 
 #define NTDDI_WIN7                          0x06010000
+#define NTDDI_WIN7SP1						0x06010100
 #define NTDDI_WIN8                          0x06020000
 
 //
@@ -181,7 +156,8 @@
 #define NTDDI_VERSION_FROM_WIN32_WINNT(ver)     NTDDI_VERSION_FROM_WIN32_WINNT2(ver)
 
 #if !defined(_WIN32_WINNT) && !defined(_CHICAGO_)
-#define  _WIN32_WINNT   0x0601
+#define _WIN32_WINNT	_WIN32_WINNT_WINXP
+#define NTDDI_VERSION	NTDDI_WINXPSP3
 #endif
 
 #ifndef NTDDI_VERSION
@@ -189,7 +165,7 @@
 // set NTDDI_VERSION based on _WIN32_WINNT
 #define NTDDI_VERSION   NTDDI_VERSION_FROM_WIN32_WINNT(_WIN32_WINNT)
 #else
-#define NTDDI_VERSION   0x06020000
+#define NTDDI_VERSION   NTDDI_WINXPSP3
 #endif
 #endif
 
@@ -198,16 +174,17 @@
 // set WINVER based on _WIN32_WINNT
 #define WINVER          _WIN32_WINNT
 #else
-#define WINVER          0x0602
+#define WINVER          _WIN32_WINNT_WIN7
+#define	_WIN32_WINNT	WINVER
 #endif
 #endif
 
 #ifndef _WIN32_IE
 #ifdef _WIN32_WINNT
 // set _WIN32_IE based on _WIN32_WINNT
-#if (_WIN32_WINNT < _WIN32_WINNT_WINXP)
+#if (_WIN32_WINNT <= _WIN32_WINNT_WIN2K)
 #error AsixUI need at least Windows XP
-#elif (_WIN32_WINNT == _WIN32_WINNT_WINXP)
+#elif (_WIN32_WINNT <= _WIN32_WINNT_WINXP)
 #define _WIN32_IE       _WIN32_IE_IE60
 #elif (_WIN32_WINNT <= _WIN32_WINNT_WS03)
 #define _WIN32_IE       _WIN32_IE_WS03
@@ -218,13 +195,56 @@
 #elif (_WIN32_WINNT <= _WIN32_WINNT_WIN8)
 #define _WIN32_IE       _WIN32_IE_WIN8
 #else
-#define _WIN32_IE       0x0A00
+#define _WIN32_IE       _WIN32_IE_IE100
 #endif
 #else
-#define _WIN32_IE       0x0A00
+#define _WIN32_IE       _WIN32_IE_IE80
 #endif
 #endif
 
+////////////////////////////////////////////////////////////////////////////////
+// To mimic older RichEdit behavior, set _RICHEDIT_VER to appropriate value
+//		Version 1.0 	0x0100	
+//		Version 2.0 	0x0200	
+//		Version 2.1 	0x0210
+// http://msdn.microsoft.com/en-us/library/windows/desktop/bb787873%28v=vs.85%29.aspx
+// http://blogs.msdn.com/b/murrays/archive/2006/10/14/richedit-versions.aspx
+
+// 2.0	Riched20.dll	RICHEDIT_CLASS
+// 3.0	Riched20.dll	RICHEDIT_CLASS
+// 4.1	Msftedit.dll	MSFTEDIT_CLASS
+// Windows XP SP1	Includes Microsoft Rich Edit 4.1, Microsoft Rich Edit 3.0, and a Microsoft Rich Edit 1.0 emulator.
+// Windows XP	Includes Microsoft Rich Edit 3.0 with a Microsoft Rich Edit 1.0 emulator.
+
+////////////////////////////////////////////////////////////////////////////////
+//	Version 		Ships ('ed) with 									dll name
+//
+//	3.0 			Office 2000, Windows ME/2000/XP 					riched20.dll
+//	1.0	emulator 	Office 2000, Windows 2000/XP/Vista 					riched32.dll
+//	3.1 			Windows Server 2003, Vista 							riched20.dll
+//	4.1 			Windows XP SP1, Tablet, Vista						msftedit.dll
+//	5.0 			Office 2003 										riched20.dll
+//	5.1 			Windows CE, Pocket Word 							riched20.dll
+//	6.0 			Office 2007, Encarta Math Calculator 				riched20.dll
+//	7.0				Office 2010											
+//
+
+#ifndef _RICHEDIT_VER
+// set _WIN32_IE based on _WIN32_WINNT
+#ifdef _WIN32_WINNT
+#if (_WIN32_WINNT < _WIN32_WINNT_WINXP)
+#error AsixUI need at least Windows XP
+#elif (_WIN32_WINNT <= _WIN32_WINNT_WIN7)
+#define _RICHEDIT_VER       0x0300
+#elif (_WIN32_WINNT <= _WIN32_WINNT_WIN8)
+#define _RICHEDIT_VER      0x0800
+#else
+#define _RICHEDIT_VER      0x0300
+#endif
+#endif
+#else
+#define _RICHEDIT_VER      0x0300
+#endif
 //
 // Sanity check for compatible versions
 //
@@ -245,7 +265,7 @@
 
 #endif  // defined(_WIN32_WINNT) && !defined(MIDL_PASS) && !defined(_WINRESRC_)
 
-#define WIN32_LEAN_AND_MEAN //  浠?Windows 澶存枃浠朵腑鎺掗櫎鏋佸皯浣跨敤鐨勪俊鎭?
+#define WIN32_LEAN_AND_MEAN //  从 Windows 头文件中排除极少使用的信息
 
 #endif  // !ASIXVER_INC_
 
