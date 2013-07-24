@@ -7,62 +7,58 @@
 
 #pragma once
 
-#if defined(_WIN32_WCE) && !defined(__ATLRESCE_H__)
-	#error Use asixresCE.h instead of asixres.h for Windows CE
-#endif
-
 
 #ifdef RC_INVOKED
 #ifndef _INC_WINDOWS
 
-  #define _INC_WINDOWS
+#define _INC_WINDOWS
 
-  #ifndef _WIN32_WCE
-    #define VS_VERSION_INFO     1
+#ifndef _WIN32_WCE
+#define VS_VERSION_INFO     1
 
-    #ifdef APSTUDIO_INVOKED
-      #define APSTUDIO_HIDDEN_SYMBOLS // Ignore following symbols
-    #endif // APSTUDIO_INVOKED
+#ifdef APSTUDIO_INVOKED
+#define APSTUDIO_HIDDEN_SYMBOLS // Ignore following symbols
+#endif // APSTUDIO_INVOKED
 
-    #ifndef WINVER
-      #define WINVER 0x0400   // default to Windows Version 4.0
-    #endif // !WINVER
+#ifndef WINVER
+#define WINVER 0x0400   // default to Windows Version 4.0
+#endif // !WINVER
 
-    #include <winresrc.h>
+#include <winresrc.h>
 
-    // operation messages sent to DLGINIT
-    #define LB_ADDSTRING    (WM_USER+1)
-    #define CB_ADDSTRING    (WM_USER+3)
-  #endif // !_WIN32_WCE
+// operation messages sent to DLGINIT
+#define LB_ADDSTRING    (WM_USER+1)
+#define CB_ADDSTRING    (WM_USER+3)
+#endif // !_WIN32_WCE
 
-  #ifdef APSTUDIO_INVOKED
-    #undef APSTUDIO_HIDDEN_SYMBOLS
-  #endif // APSTUDIO_INVOKED
+#ifdef APSTUDIO_INVOKED
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#endif // APSTUDIO_INVOKED
 
-  #ifdef IDC_STATIC
-    #undef IDC_STATIC
-  #endif // IDC_STATIC
-  #define IDC_STATIC      (-1)
+#ifdef IDC_STATIC
+#undef IDC_STATIC
+#endif // IDC_STATIC
+#define IDC_STATIC      (-1)
 
 #endif // !_INC_WINDOWS
 #endif // RC_INVOKED
 
 #ifdef APSTUDIO_INVOKED
-  #define APSTUDIO_HIDDEN_SYMBOLS
+#define APSTUDIO_HIDDEN_SYMBOLS
 #endif // APSTUDIO_INVOKED
 
 ///////////////////////////////////////////////////////////////////////////////
 // ATL resource types
 
 #ifndef RC_INVOKED
-  #define RT_DLGINIT  MAKEINTRESOURCE(240)
-  #define RT_TOOLBAR  MAKEINTRESOURCE(241)
+#define RT_DLGINIT  MAKEINTRESOURCE(240)
+#define RT_TOOLBAR  MAKEINTRESOURCE(241)
 #endif // RC_INVOKED
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifdef APSTUDIO_INVOKED
-  #undef APSTUDIO_HIDDEN_SYMBOLS
+#undef APSTUDIO_HIDDEN_SYMBOLS
 #endif // APSTUDIO_INVOKED
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -73,23 +69,23 @@
 
 #ifndef RC_INVOKED  // code only
 // standard control bars (IDW = window ID)
-  #define ATL_IDW_TOOLBAR               0xE800  // main Toolbar for window
-  #define ATL_IDW_STATUS_BAR            0xE801  // Status bar window
-  #define ATL_IDW_COMMAND_BAR           0xE802  // Command bar window
+#define ATL_IDW_TOOLBAR               0xE800  // main Toolbar for window
+#define ATL_IDW_STATUS_BAR            0xE801  // Status bar window
+#define ATL_IDW_COMMAND_BAR           0xE802  // Command bar window
 
 // parts of a frame window
-  #define ATL_IDW_CLIENT                0xE900
-  #define ATL_IDW_PANE_FIRST            0xE900  // first pane (256 max)
-  #define ATL_IDW_PANE_LAST             0xE9FF
-  #define ATL_IDW_HSCROLL_FIRST         0xEA00  // first Horz scrollbar (16 max)
-  #define ATL_IDW_VSCROLL_FIRST         0xEA10  // first Vert scrollbar (16 max)
+#define ATL_IDW_CLIENT                0xE900
+#define ATL_IDW_PANE_FIRST            0xE900  // first pane (256 max)
+#define ATL_IDW_PANE_LAST             0xE9FF
+#define ATL_IDW_HSCROLL_FIRST         0xEA00  // first Horz scrollbar (16 max)
+#define ATL_IDW_VSCROLL_FIRST         0xEA10  // first Vert scrollbar (16 max)
 
-  #define ATL_IDW_SIZE_BOX              0xEA20  // size box for splitters
-  #define ATL_IDW_PANE_SAVE             0xEA21  // to shift ATL_IDW_PANE_FIRST
+#define ATL_IDW_SIZE_BOX              0xEA20  // size box for splitters
+#define ATL_IDW_PANE_SAVE             0xEA21  // to shift ATL_IDW_PANE_FIRST
 
 // bands for a rebar
-  #define ATL_IDW_BAND_FIRST            0xEB00
-  #define ATL_IDW_BAND_LAST             0xEBFF
+#define ATL_IDW_BAND_FIRST            0xEB00
+#define ATL_IDW_BAND_LAST             0xEBFF
 #endif // !RC_INVOKED
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,10 +148,10 @@
 #define ID_WINDOW_TILE_VERT             0xE134
 #define ID_WINDOW_SPLIT                 0xE135
 #ifndef RC_INVOKED      // code only
-  #define ATL_IDM_WINDOW_FIRST          0xE130
-  #define ATL_IDM_WINDOW_LAST           0xE13F
-  #define ATL_IDM_FIRST_MDICHILD        0xFF00  // window list starts here
-  #define ATL_IDM_LAST_MDICHILD         0xFFFD
+#define ATL_IDM_WINDOW_FIRST          0xE130
+#define ATL_IDM_WINDOW_LAST           0xE13F
+#define ATL_IDM_FIRST_MDICHILD        0xFF00  // window list starts here
+#define ATL_IDM_LAST_MDICHILD         0xFFFD
 #endif // !RC_INVOKED
 // TabView
 #define ID_WINDOW_TABFIRST              0xFF00	// = ATL_IDM_FIRST_MDICHILD
@@ -203,7 +199,7 @@
 #define ID_OLE_EDIT_PROPERTIES          0xE204
 #define ID_OLE_VERB_FIRST               0xE210     // range - 16 max
 #ifndef RC_INVOKED      // code only
-  #define ID_OLE_VERB_LAST              0xE21F
+#define ID_OLE_VERB_LAST              0xE21F
 #endif // !RC_INVOKED
 
 // View commands (same number used as IDW used for toolbar and status bar)
@@ -216,7 +212,7 @@
 // Standard control IDs
 
 #ifdef IDC_STATIC
-  #undef IDC_STATIC
+#undef IDC_STATIC
 #endif // IDC_STATIC
 #define IDC_STATIC              (-1)     // all static controls
 
@@ -227,7 +223,7 @@
 #define ATL_IDS_IDLEMESSAGE             0xE001
 
 #ifndef RC_INVOKED      // code only
-  #define ATL_IDS_SCFIRST               0xEF00
+#define ATL_IDS_SCFIRST               0xEF00
 #endif // !RC_INVOKED
 
 #define ATL_IDS_SCSIZE                  0xEF00
