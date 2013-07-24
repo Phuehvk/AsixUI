@@ -14,6 +14,10 @@
 #include <asixver.h>
 #include <atlbase.h>
 
+#if (_MSC_VER < 1500)
+#error AsixUI requires Visual C++ 2008 compiler or higher
+#endif
+
 #ifndef __ATLBASE_H__
 #error asixapp.h requires atlbase.h to be included first
 #endif
@@ -22,7 +26,7 @@
 #error AsixUI  is not supported WinCE platform
 #endif
 
-#if (_WIN32_WINNT < 0x0501 || _RICHEDIT_VER < 0x020)
+#if (_WIN32_WINNT < 0x0501 || _RICHEDIT_VER < 0x0300)
 #error AsixUI requires Windows XP or higher
 #endif
 
@@ -43,7 +47,16 @@
 #endif
 
 #include <commctrl.h>
-#pragma comment(lib, "comctl32.lib")
+// #pragma comment(lib, "comctl32.lib")
+#if defined _M_IX86
+#pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_IA64
+#pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ia64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_X64
+#pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#else
+#pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#endif
 
 #include <asixres.h>
 
