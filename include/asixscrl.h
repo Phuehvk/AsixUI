@@ -42,13 +42,13 @@ namespace Asix
 	// CScrollImpl - Provides scrolling support to any window
 
 	// Scroll extended styles
-#define SCRL_SCROLLCHILDREN		0x00000001
-#define SCRL_ERASEBACKGROUND	0x00000002
-#define SCRL_NOTHUMBTRACKING	0x00000004
-#define SCRL_SMOOTHSCROLL		0x00000008
-#define SCRL_DISABLENOSCROLLV	0x00000010
-#define SCRL_DISABLENOSCROLLH	0x00000020
-#define SCRL_DISABLENOSCROLL	(SCRL_DISABLENOSCROLLV | SCRL_DISABLENOSCROLLH)
+	#define SCRL_SCROLLCHILDREN		0x00000001
+	#define SCRL_ERASEBACKGROUND	0x00000002
+	#define SCRL_NOTHUMBTRACKING	0x00000004
+	#define SCRL_SMOOTHSCROLL		0x00000008
+	#define SCRL_DISABLENOSCROLLV	0x00000010
+	#define SCRL_DISABLENOSCROLLH	0x00000020
+	#define SCRL_DISABLENOSCROLL	(SCRL_DISABLENOSCROLLV | SCRL_DISABLENOSCROLLH)
 
 
 	template <class T>
@@ -1710,7 +1710,7 @@ namespace Asix
 	// CZoomScrollWindowImpl - Implements scrolling window with zooming
 
 	template <class T, class TBase = ATL::CWindow, class TWinTraits = ATL::CControlWinTraits>
-	class ATL_NO_VTABLE CZoomScrollWindowImpl : public ATL::CWindowImpl< T, TBase, TWinTraits >, public CZoomScrollImpl< T >
+	class ATL_NO_VTABLE CZoomScrollWindowImpl : public ATL::CWindowImpl<T, TBase, TWinTraits >, public CZoomScrollImpl<T>
 	{
 	public:
 		BEGIN_MSG_MAP(CZoomScrollWindowImpl)
@@ -1748,7 +1748,7 @@ namespace Asix
 	// CScrollContainer
 
 	template <class T, class TBase = ATL::CWindow, class TWinTraits = ATL::CControlWinTraits>
-	class ATL_NO_VTABLE CScrollContainerImpl : public CScrollWindowImpl< T, TBase, TWinTraits >
+	class ATL_NO_VTABLE CScrollContainerImpl : public CScrollWindowImpl<T, TBase, TWinTraits>
 	{
 	public:
 		DECLARE_WND_CLASS_EX(NULL, 0, -1)
